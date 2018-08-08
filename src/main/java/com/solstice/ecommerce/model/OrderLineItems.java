@@ -1,31 +1,38 @@
 package com.solstice.ecommerce.model;
 
+
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
 public class OrderLineItems {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "orderLineId")
+    private long orderLineId;
+
+    @OneToOne
+    @JoinColumn(name = "orederLineId", referencedColumnName = "productId")
     private Product product;
     private long quantity;
     private double price;
     private double totalPrice;
+    @OneToOne
+    @JoinColumn(name = "orderLineId", referencedColumnName = "shipmentId")
     private Shipment shipment;
 
     public OrderLineItems() {
     }
 
-    public OrderLineItems(Product product, long quantity, double price, double totalPrice, Shipment shipment) {
-        this.product = product;
-        this.quantity = quantity;
-        this.price = price;
-        this.totalPrice = totalPrice;
-        this.shipment = shipment;
+    public long getOrderLineId() {
+        return orderLineId;
     }
 
-    public Product getProduct() {
-        return product;
+    public void setOrderLineId(long orderLineId) {
+        this.orderLineId = orderLineId;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
-    }
 
     public long getQuantity() {
         return quantity;
@@ -49,6 +56,14 @@ public class OrderLineItems {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public Shipment getShipment() {

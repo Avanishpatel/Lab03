@@ -20,6 +20,13 @@ public class Account {
 
     public Account(){ }
 
+    public Account(String firstName, String lastName, String email, List<Address> address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.address = address;
+    }
+
     public long getAccountNumber() {
         return accountNumber;
     }

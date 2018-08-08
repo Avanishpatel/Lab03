@@ -1,28 +1,31 @@
 package com.solstice.ecommerce.model;
 
+import javax.persistence.*;
 import java.sql.Date;
-import java.sql.Timestamp;
 
+@Entity
 public class Orders {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "orderId")
     private long orderNumber;
+
+    @OneToOne
+    @JoinColumn(name ="orderId", referencedColumnName = "accountId")
     private Account account;
     private Date orderDate;
+    @OneToOne
+    @JoinColumn(name ="orderId", referencedColumnName = "addressId")
     private Address shippingAddress;
+    @OneToOne
+    @JoinColumn(name = "orderId", referencedColumnName = "orderLineId")
     private OrderLineItems orderLineItems;
     private double totalPrice;
 
     public Orders() {
     }
 
-    public Orders(long orderNumber, Account account, Date orderDate, Address shippingAddress, OrderLineItems orderLineItems, double totalPrice) {
-        this.orderNumber = orderNumber;
-        this.account = account;
-        this.orderDate = orderDate;
-        this.shippingAddress = shippingAddress;
-        this.orderLineItems = orderLineItems;
-        this.totalPrice = totalPrice;
-    }
 
     public long getOrderNumber() {
         return orderNumber;

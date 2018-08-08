@@ -1,7 +1,14 @@
 package com.solstice.ecommerce.model;
 
+import javax.persistence.*;
+
+@Entity
 public class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "productId")
+    private long productId;
     private String productName;
     private String productDescription;
     private byte[] image;
@@ -10,11 +17,12 @@ public class Product {
     public Product() {
     }
 
-    public Product(String productName, String productDescription, byte[] image, double price) {
-        this.productName = productName;
-        this.productDescription = productDescription;
-        this.image = image;
-        this.price = price;
+    public long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(long productId) {
+        this.productId = productId;
     }
 
     public String getProductName() {

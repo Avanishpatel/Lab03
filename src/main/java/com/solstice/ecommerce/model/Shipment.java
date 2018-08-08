@@ -1,11 +1,23 @@
 package com.solstice.ecommerce.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
 public class Shipment {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "shipmentId")
+    private long shipmentId;
+    @OneToOne
+    @JoinColumn(name = "shipmentId", referencedColumnName = "accountId")
     private Account account;
+    @OneToOne()
+    @JoinColumn(name = "shipmentId", referencedColumnName = "addressId")
     private Address address;
+    @OneToOne
+    @JoinColumn(name = "shipmentId", referencedColumnName = "orderLineId")
     private  OrderLineItems items;
     private Date shippingDate;
     private Date deliveryDate;
@@ -13,12 +25,12 @@ public class Shipment {
     public Shipment() {
     }
 
-    public Shipment(Account account, Address address, OrderLineItems items, Date shippingDate, Date deliveryDate) {
-        this.account = account;
-        this.address = address;
-        this.items = items;
-        this.shippingDate = shippingDate;
-        this.deliveryDate = deliveryDate;
+    public long getShipmentId() {
+        return shipmentId;
+    }
+
+    public void setShipmentId(long shipmentId) {
+        this.shipmentId = shipmentId;
     }
 
     public Account getAccount() {
