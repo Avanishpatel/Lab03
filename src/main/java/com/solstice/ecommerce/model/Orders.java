@@ -1,46 +1,38 @@
 package com.solstice.ecommerce.model;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 public class Orders {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "orderId")
-    private long orderNumber;
-
-    @OneToOne
-    @JoinColumn(name ="orderId", referencedColumnName = "accountId")
-    private Account account;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long orderId;
     private Date orderDate;
-    @OneToOne
-    @JoinColumn(name ="orderId", referencedColumnName = "addressId")
-    private Address shippingAddress;
-    @OneToOne
-    @JoinColumn(name = "orderId", referencedColumnName = "orderLineId")
-    private OrderLineItems orderLineItems;
     private double totalPrice;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "addressId")
+    private Address shippingAddress;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "accountId")
+    private Account account;
+
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
+    @JoinColumn(name = "lineId")
+    private OrderLineItems orderLineItems;
 
     public Orders() {
     }
 
-
-    public long getOrderNumber() {
-        return orderNumber;
+    public long getOrderId() {
+        return orderId;
     }
 
-    public void setOrderNumber(long orderNumber) {
-        this.orderNumber = orderNumber;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
     }
 
     public Date getOrderDate() {
@@ -49,6 +41,22 @@ public class Orders {
 
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public Address getShippingAddress() {
@@ -65,13 +73,5 @@ public class Orders {
 
     public void setOrderLineItems(OrderLineItems orderLineItems) {
         this.orderLineItems = orderLineItems;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
     }
 }

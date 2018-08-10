@@ -3,8 +3,6 @@ package com.solstice.ecommerce.service;
 import com.solstice.ecommerce.model.Account;
 import com.solstice.ecommerce.repository.AccountRepository;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 

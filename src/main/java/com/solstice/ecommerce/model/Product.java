@@ -1,21 +1,23 @@
 package com.solstice.ecommerce.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import java.io.Serializable;
 
 @Entity
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "productId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long productId;
     private String productName;
-    private String productDescription;
+    private String productDesc;
     private byte[] image;
     private double price;
-
-    public Product() {
-    }
+    {}
+    public Product(){}
 
     public long getProductId() {
         return productId;
@@ -33,12 +35,12 @@ public class Product {
         this.productName = productName;
     }
 
-    public String getProductDescription() {
-        return productDescription;
+    public String getProductDesc() {
+        return productDesc;
     }
 
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
+    public void setProductDesc(String productDesc) {
+        this.productDesc = productDesc;
     }
 
     public byte[] getImage() {

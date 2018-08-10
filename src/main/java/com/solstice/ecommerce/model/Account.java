@@ -1,38 +1,42 @@
 package com.solstice.ecommerce.model;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Account {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "accountId")
-    private long accountNumber;
+    private long accountId;
     private String firstName;
     private String lastName;
     private String email;
 
-    @OneToMany()
-    @JoinColumn(name = "accountId", referencedColumnName = "accountId")
-    private List<Address> address;
+
+    @OneToMany( cascade = CascadeType.ALL,orphanRemoval = true)
+    @JoinColumn(name = "account_id")
+    private Set<Address> addresses = new HashSet<Address>();
+
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "accountId")
+//    private Account account;
+
+    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+    @JoinColumn(name = "accountId")
+    private Set<Orders> orders;
 
     public Account(){ }
 
-    public Account(String firstName, String lastName, String email, List<Address> address) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.address = address;
+
+    public long getAccountId() {
+        return accountId;
     }
 
-    public long getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(long accountNumber) {
-        this.accountNumber = accountNumber;
+    public void setAccountId(long accountId) {
+        this.accountId = accountId;
     }
 
     public String getFirstName() {
@@ -59,11 +63,11 @@ public class Account {
         this.email = email;
     }
 
-    public List<Address> getAddress() {
-        return address;
+    public Set<Address> getAddresses() {
+        return addresses;
     }
 
-    public void setAddress(List<Address> address) {
-        this.address = address;
+    public  void setAddresses(Set<Address> addresses) {
+        this.addresses = addresses;
     }
 }

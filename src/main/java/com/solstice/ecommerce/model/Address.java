@@ -1,34 +1,44 @@
 package com.solstice.ecommerce.model;
-
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Address {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="addressId")
-    private long id;
+    private long addressId;
     private String street;
     private String aptOrBuilding;
     private String city;
     private String state;
     private int zipCode;
     private String country;
-    @Column(name = "accountId")
-    private long accountId;
+
+//    @OneToMany
+//    @JoinColumn(name = "orderId")
+//    private Set<Orders> orders;
 
     public Address() {
     }
 
+//    public Set<Orders> getOrders() {
+//        return orders;
+//    }
+//
+//    public void setOrders(Set<Orders> orders) {
+//        this.orders = orders;
+//    }
 
-    public long getId() {
-        return id;
+    public long getAddressId() {
+        return addressId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setAddressId(long addressId) {
+        this.addressId = addressId;
     }
+
 
     public String getStreet() {
         return street;
@@ -77,4 +87,6 @@ public class Address {
     public void setCountry(String country) {
         this.country = country;
     }
+
+
 }

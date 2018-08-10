@@ -2,24 +2,22 @@ package com.solstice.ecommerce.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class Shipment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "shipmentId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long shipmentId;
     @OneToOne
-    @JoinColumn(name = "shipmentId", referencedColumnName = "accountId")
-    private Account account;
-    @OneToOne()
-    @JoinColumn(name = "shipmentId", referencedColumnName = "addressId")
-    private Address address;
-    @OneToOne
-    @JoinColumn(name = "shipmentId", referencedColumnName = "orderLineId")
-    private  OrderLineItems items;
-    private Date shippingDate;
+    @JoinColumn(name = "addressId")
+    private Address shippingAddress;
+    @OneToMany(mappedBy = "shipment",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private Set<OrderLineItems> orderLineItems;
+    private Date shippedDate;
     private Date deliveryDate;
 
     public Shipment() {
@@ -33,36 +31,28 @@ public class Shipment {
         this.shipmentId = shipmentId;
     }
 
-    public Account getAccount() {
-        return account;
+    public Address getShippingAddress() {
+        return shippingAddress;
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setShippingAddress(Address shippingAddress) {
+        this.shippingAddress = shippingAddress;
     }
 
-    public Address getAddress() {
-        return address;
+    public Set<OrderLineItems> getOrderLineItems() {
+        return orderLineItems;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setOrderLineItems(Set<OrderLineItems> orderLineItems) {
+        this.orderLineItems = orderLineItems;
     }
 
-    public OrderLineItems getItems() {
-        return items;
+    public Date getShippedDate() {
+        return shippedDate;
     }
 
-    public void setItems(OrderLineItems items) {
-        this.items = items;
-    }
-
-    public Date getShippingDate() {
-        return shippingDate;
-    }
-
-    public void setShippingDate(Date shippingDate) {
-        this.shippingDate = shippingDate;
+    public void setShippedDate(Date shippedDate) {
+        this.shippedDate = shippedDate;
     }
 
     public Date getDeliveryDate() {

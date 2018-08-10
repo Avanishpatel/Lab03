@@ -1,44 +1,43 @@
 package com.solstice.ecommerce.model;
 
-
 import javax.persistence.*;
-import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Entity
 public class OrderLineItems {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "orderLineId")
-    private long orderLineId;
-
-    @OneToOne
-    @JoinColumn(name = "orederLineId", referencedColumnName = "productId")
-    private Product product;
-    private long quantity;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long lineId;
+    private int quantity;
     private double price;
     private double totalPrice;
-    @OneToOne
-    @JoinColumn(name = "orderLineId", referencedColumnName = "shipmentId")
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "productId")
+    private Product product;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shipmentId")
     private Shipment shipment;
 
     public OrderLineItems() {
     }
 
-    public long getOrderLineId() {
-        return orderLineId;
+    public long getLineId() {
+        return lineId;
     }
 
-    public void setOrderLineId(long orderLineId) {
-        this.orderLineId = orderLineId;
+    public void setLineId(long lineId) {
+        this.lineId = lineId;
     }
 
-
-    public long getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(long quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
