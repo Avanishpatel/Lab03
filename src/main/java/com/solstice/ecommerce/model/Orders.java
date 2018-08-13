@@ -1,5 +1,8 @@
 package com.solstice.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -14,10 +17,12 @@ public class Orders {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "addressId")
+    @JsonIgnoreProperties(value = "account")
     private Address shippingAddress;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "accountId")
+    @JsonIgnoreProperties(value = "orders")
     private Account account;
 
     @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)

@@ -24,10 +24,11 @@ public class OrderController {
         return ordersService.getAllOrders();
     }
 
-    @PostMapping()
-    public String addOrder(@RequestBody Orders orders) {
 
-        ordersService.addOrders(orders);
+    @PostMapping("/account/{accountId}/address/{addressId}/orderLine/{orderLineId}")
+    public String addOrder(@PathVariable("accountId") long accountId,@PathVariable("addressId") long addressId,@PathVariable("orderLineId") long orderLineId,@RequestBody Orders orders) {
+
+        ordersService.addOrders(accountId, addressId, orderLineId,orders);
         return "Order is created.";
     }
 
@@ -50,6 +51,21 @@ public class OrderController {
         ordersService.deleteOrderById(id);
 
         return "Order with order number " + id + " successfully deleted.";
+    }
+
+
+    // get order details by account ID
+    @GetMapping("/accountId/{accountId}")
+    public Orders getOrderForAccount(@PathVariable("accountId") long accountId) {
+
+        return ordersService.getAllOrderForAccount(accountId);
+    }
+
+    // get order details by accont ID order by date
+    @GetMapping("/accountId/{accountId}/date")
+    public List<Orders> getAllOrdersByAccountByDate(@PathVariable("accountId") long accountId) {
+
+        return ordersService.getAllOrdersByAccountByDate(accountId);
     }
 
 }

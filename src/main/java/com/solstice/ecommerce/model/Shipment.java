@@ -1,5 +1,7 @@
 package com.solstice.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -12,10 +14,10 @@ public class Shipment {
     private long shipmentId;
     @OneToOne
     @JoinColumn(name = "addressId")
+    @JsonIgnoreProperties(value = "account")
     private Address shippingAddress;
-    @OneToMany(mappedBy = "shipment",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
+    @OneToMany(mappedBy = "shipment", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = "shipment")
     private Set<OrderLineItems> orderLineItems;
     private Date shippedDate;
     private Date deliveryDate;

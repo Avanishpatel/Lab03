@@ -1,5 +1,7 @@
 package com.solstice.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Optional;
 import java.util.Set;
@@ -20,6 +22,7 @@ public class OrderLineItems {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shipmentId")
+    @JsonIgnoreProperties(value = "orderLineItems")
     private Shipment shipment;
 
     public OrderLineItems() {

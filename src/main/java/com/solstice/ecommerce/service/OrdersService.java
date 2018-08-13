@@ -1,21 +1,30 @@
 package com.solstice.ecommerce.service;
 
-import com.solstice.ecommerce.model.Account;
 import com.solstice.ecommerce.model.Orders;
+import com.solstice.ecommerce.repository.AccountRepository;
+import com.solstice.ecommerce.repository.AddressRepository;
+import com.solstice.ecommerce.repository.OrderLineItemsRepository;
 import com.solstice.ecommerce.repository.OrdersRepository;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class OrdersService {
 
     private OrdersRepository ordersRepository;
+    private AccountRepository accountRepository;
+    private AddressRepository addressRepository;
+    private OrderLineItemsRepository orderLineItemsRepository;
 
-    public OrdersService(OrdersRepository ordersRepository) {
+    public OrdersService(OrdersRepository ordersRepository, AccountRepository accountRepository, AddressRepository addressRepository, OrderLineItemsRepository orderLineItemsRepository) {
         this.ordersRepository = ordersRepository;
+        this.accountRepository = accountRepository;
+        this.addressRepository = addressRepository;
+        this.orderLineItemsRepository = orderLineItemsRepository;
     }
 
     public List<Orders> getAllOrders(){
@@ -23,8 +32,11 @@ public class OrdersService {
         return ordersRepository.findAll();
     }
 
-    public void addOrders(Orders orders) {
+    public void addOrders(long accountId, long addressId, long orderLineId, Orders orders) {
 
+        orders.setAccount(accountRepository.getOne(accountId));
+        orders.setShippingAddress(addressRepository.getOne(addressId));
+        orders.setOrderLineItems(orderLineItemsRepository.getOne(orderLineId));
         ordersRepository.save(orders);
     }
 
@@ -41,5 +53,20 @@ public class OrdersService {
     public void deleteOrderById(long id) {
 
         ordersRepository.deleteById(id);
+    }
+
+    public Orders getAllOrderForAccount(long accountId) {
+
+        return ordersRepository.findAllByAccount_AccountId(accountId);
+
+//        List<Orders> orders = new ArrayList<>();
+//        ordersRepository.findAll().forEach(orders :: add);
+//        return orders.stream().filter(o -> o.getAccount().equals(accountRepository.getOne(accountId))).collect(Collectors.toCollection(ArrayList::new));
+
+    }
+
+    public List<Orders> getAllOrdersByAccountByDate(long accountId) {
+
+        return ordersRepository.findAllByAccount_AccountIdOrderByOrderDate(accountId);
     }
 }
