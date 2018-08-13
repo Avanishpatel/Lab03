@@ -24,10 +24,10 @@ public class ShipmentController {
         return shipmentService.getAllShipment();
     }
 
-    @PostMapping("/address/{addressId}")
-    public String addShipment(@PathVariable("addressId") long id,@RequestBody Shipment shipment) {
+    @PostMapping("/account/{accountId}/address/{addressId}")
+    public String addShipment(@PathVariable("accountId")long accountId,@PathVariable("addressId") long addressId,@RequestBody Shipment shipment) {
 
-        shipmentService.addShipment(id,shipment);
+        shipmentService.addShipment(accountId,addressId,shipment);
 
         return "Shipment is added.";
     }
@@ -51,5 +51,11 @@ public class ShipmentController {
         shipmentService.deleteShipmentById(id);
 
         return "Shipment with Shipment Number " + id + " successfully deleted.";
+    }
+
+    @GetMapping("/accountId/{accountId}/date")
+    public List<Shipment> getShipmentByAccountByDeliveryDate(@PathVariable("accountId") long accountId) {
+
+        return shipmentService.getShipmentByAccountByDeliveryDat(accountId);
     }
 }

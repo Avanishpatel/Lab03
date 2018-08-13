@@ -22,6 +22,13 @@ public class Shipment {
     private Date shippedDate;
     private Date deliveryDate;
 
+
+
+    @OneToOne
+    @JoinColumn(name = "accountId")
+    @JsonIgnoreProperties(value = "orders")
+    private Account account;
+
     public Shipment() {
     }
 
@@ -63,5 +70,13 @@ public class Shipment {
 
     public void setDeliveryDate(Date deliveryDate) {
         this.deliveryDate = deliveryDate;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }
