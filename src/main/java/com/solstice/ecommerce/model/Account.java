@@ -1,6 +1,5 @@
 package com.solstice.ecommerce.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -19,20 +18,18 @@ public class Account {
     private String email;
 
 
-    @OneToMany( cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "account_id")
     @JsonIgnoreProperties(value = "account")
     private Set<Address> addresses = new HashSet<Address>();
 
-//    @ManyToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "accountId")
-//    private Account account;
 
-    @OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "accountId")
     private Set<Orders> orders;
 
-    public Account(){ }
+    public Account() {
+    }
 
 
     public long getAccountId() {
@@ -71,7 +68,7 @@ public class Account {
         return addresses;
     }
 
-    public  void setAddresses(Set<Address> addresses) {
+    public void setAddresses(Set<Address> addresses) {
         this.addresses = addresses;
     }
 }

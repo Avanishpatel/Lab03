@@ -1,13 +1,13 @@
 package com.solstice.ecommerce.model;
+
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="addressId")
+    @Column(name = "addressId")
     private long addressId;
     private String street;
     private String aptOrBuilding;
@@ -16,21 +16,9 @@ public class Address {
     private int zipCode;
     private String country;
 
-
-//    @OneToMany
-//    @JoinColumn(name = "orderId")
-//    private Set<Orders> orders;
-
     public Address() {
     }
 
-//    public Set<Orders> getOrders() {
-//        return orders;
-//    }
-//
-//    public void setOrders(Set<Orders> orders) {
-//        this.orders = orders;
-//    }
 
     public long getAddressId() {
         return addressId;

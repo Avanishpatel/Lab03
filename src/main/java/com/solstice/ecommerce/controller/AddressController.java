@@ -1,6 +1,5 @@
 package com.solstice.ecommerce.controller;
 
-import com.solstice.ecommerce.model.Account;
 import com.solstice.ecommerce.model.Address;
 import com.solstice.ecommerce.service.AddressService;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +36,7 @@ public class AddressController {
     }
 
     @PutMapping("/{id}")
-    public String updateAddress(@PathVariable("id") Long id, @RequestBody Address address) {
+    public String updateAddress(@PathVariable("id") long id, @RequestBody Address address) {
 
         addressService.updateAddress(id, address);
         return "Address is updated.";

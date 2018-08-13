@@ -1,6 +1,5 @@
 package com.solstice.ecommerce.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -25,7 +24,7 @@ public class Orders {
     @JsonIgnoreProperties(value = "orders")
     private Account account;
 
-    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "lineId")
     private OrderLineItems orderLineItems;
 

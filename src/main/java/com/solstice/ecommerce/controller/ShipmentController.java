@@ -25,9 +25,9 @@ public class ShipmentController {
     }
 
     @PostMapping("/account/{accountId}/address/{addressId}")
-    public String addShipment(@PathVariable("accountId")long accountId,@PathVariable("addressId") long addressId,@RequestBody Shipment shipment) {
+    public String addShipment(@PathVariable("accountId") long accountId, @PathVariable("addressId") long addressId, @RequestBody Shipment shipment) {
 
-        shipmentService.addShipment(accountId,addressId,shipment);
+        shipmentService.addShipment(accountId, addressId, shipment);
 
         return "Shipment is added.";
     }
@@ -39,7 +39,7 @@ public class ShipmentController {
     }
 
     @PutMapping("/{id}")
-    public String updateShipment(@PathVariable("id") Long id, @RequestBody Shipment shipment) {
+    public String updateShipment(@PathVariable("id") long id, @RequestBody Shipment shipment) {
 
         shipmentService.updateShipment(id, shipment);
         return "Shipment is updated.";

@@ -4,6 +4,7 @@ package com.solstice.ecommerce.controller;
 import com.solstice.ecommerce.model.Account;
 import com.solstice.ecommerce.service.AccountService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +39,7 @@ public class AccountController {
     }
 
     @PutMapping("/{id}")
-    public String updateAccount(@PathVariable("id") Long id, @RequestBody Account account) {
+    public String updateAccount(@PathVariable("id") long id, @RequestBody Account account) {
 
         accountService.updateAccount(id, account);
         return "Account is updated.";

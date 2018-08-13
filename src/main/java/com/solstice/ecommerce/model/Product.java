@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.io.Serializable;
 
 @Entity
 public class Product {
@@ -16,8 +15,12 @@ public class Product {
     private String productDesc;
     private byte[] image;
     private double price;
-    {}
-    public Product(){}
+
+    {
+    }
+
+    public Product() {
+    }
 
     public long getProductId() {
         return productId;

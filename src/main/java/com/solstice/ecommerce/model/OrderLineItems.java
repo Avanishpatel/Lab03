@@ -3,8 +3,6 @@ package com.solstice.ecommerce.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.Optional;
-import java.util.Set;
 
 @Entity
 public class OrderLineItems {
@@ -14,6 +12,7 @@ public class OrderLineItems {
     private long lineId;
     private int quantity;
     private double price;
+    @Transient
     private double totalPrice;
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -1,6 +1,5 @@
 package com.solstice.ecommerce.controller;
 
-import com.solstice.ecommerce.model.Account;
 import com.solstice.ecommerce.model.Orders;
 import com.solstice.ecommerce.service.OrdersService;
 import org.springframework.web.bind.annotation.*;
@@ -26,9 +25,9 @@ public class OrderController {
 
 
     @PostMapping("/account/{accountId}/address/{addressId}/orderLine/{orderLineId}")
-    public String addOrder(@PathVariable("accountId") long accountId,@PathVariable("addressId") long addressId,@PathVariable("orderLineId") long orderLineId,@RequestBody Orders orders) {
+    public String addOrder(@PathVariable("accountId") long accountId, @PathVariable("addressId") long addressId, @PathVariable("orderLineId") long orderLineId, @RequestBody Orders orders) {
 
-        ordersService.addOrders(accountId, addressId, orderLineId,orders);
+        ordersService.addOrders(accountId, addressId, orderLineId, orders);
         return "Order is created.";
     }
 
@@ -39,7 +38,7 @@ public class OrderController {
     }
 
     @PutMapping("/{id}")
-    public String updateOrderbyId(@PathVariable("id") Long id, @RequestBody Orders orders) {
+    public String updateOrderbyId(@PathVariable("id") long id, @RequestBody Orders orders) {
 
         ordersService.updateOrderById(id, orders);
         return "Order is updated.";
@@ -58,7 +57,7 @@ public class OrderController {
     @GetMapping("/accountId/{accountId}")
     public Orders getOrderForAccount(@PathVariable("accountId") long accountId) {
 
-        return ordersService.getAllOrderForAccount(accountId);
+        return ordersService.getOrderForAccount(accountId);
     }
 
     // get order details by accont ID order by date

@@ -7,10 +7,8 @@ import com.solstice.ecommerce.repository.OrderLineItemsRepository;
 import com.solstice.ecommerce.repository.OrdersRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class OrdersService {
@@ -27,7 +25,7 @@ public class OrdersService {
         this.orderLineItemsRepository = orderLineItemsRepository;
     }
 
-    public List<Orders> getAllOrders(){
+    public List<Orders> getAllOrders() {
 
         return ordersRepository.findAll();
     }
@@ -55,14 +53,9 @@ public class OrdersService {
         ordersRepository.deleteById(id);
     }
 
-    public Orders getAllOrderForAccount(long accountId) {
+    public Orders getOrderForAccount(long accountId) {
 
         return ordersRepository.findAllByAccount_AccountId(accountId);
-
-//        List<Orders> orders = new ArrayList<>();
-//        ordersRepository.findAll().forEach(orders :: add);
-//        return orders.stream().filter(o -> o.getAccount().equals(accountRepository.getOne(accountId))).collect(Collectors.toCollection(ArrayList::new));
-
     }
 
     public List<Orders> getAllOrdersByAccountByDate(long accountId) {

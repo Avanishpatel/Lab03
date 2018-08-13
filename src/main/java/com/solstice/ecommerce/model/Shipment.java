@@ -23,7 +23,6 @@ public class Shipment {
     private Date deliveryDate;
 
 
-
     @OneToOne
     @JoinColumn(name = "accountId")
     @JsonIgnoreProperties(value = "orders")
