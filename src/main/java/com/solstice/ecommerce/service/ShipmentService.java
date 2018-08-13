@@ -1,7 +1,8 @@
 package com.solstice.ecommerce.service;
 
-import com.solstice.ecommerce.model.Account;
+import com.solstice.ecommerce.model.Address;
 import com.solstice.ecommerce.model.Shipment;
+import com.solstice.ecommerce.repository.AddressRepository;
 import com.solstice.ecommerce.repository.ShipmentRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +13,17 @@ import java.util.Optional;
 public class ShipmentService {
 
     private ShipmentRepository shipmentRepository;
+    private AddressRepository addressRepository;
 
-    public ShipmentService(ShipmentRepository shipmentRepository) {
+    public ShipmentService(ShipmentRepository shipmentRepository, AddressRepository addressRepository) {
         this.shipmentRepository = shipmentRepository;
+        this.addressRepository = addressRepository;
     }
 
 
-    public void addShipment(Shipment shipment) {
+    public void addShipment(long id, Shipment shipment) {
+
+        shipment.setShippingAddress(addressRepository.getOne(id));
 
         shipmentRepository.save(shipment);
     }

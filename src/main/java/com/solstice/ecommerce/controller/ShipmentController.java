@@ -24,10 +24,10 @@ public class ShipmentController {
         return shipmentService.getAllShipment();
     }
 
-    @PostMapping()
-    public String addShipment(@RequestBody Shipment shipment) {
+    @PostMapping("/address/{addressId}")
+    public String addShipment(@PathVariable("addressId") long id,@RequestBody Shipment shipment) {
 
-        shipmentService.addShipment(shipment);
+        shipmentService.addShipment(id,shipment);
 
         return "Shipment is added.";
     }
